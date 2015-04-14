@@ -23,6 +23,7 @@ function insert_blog_entry($post_text,$email,$name) {
     $db->close();
 }
 
+
 function display_all_entries(){
     $host = '127.0.0.1';
     $user = 'twickler';
@@ -89,7 +90,7 @@ function display_one_entry($blogId){
                <div class="auth_name">Post by: ' . $data->author_name . '</div></div>';
 
     }
-    echo '<a href="blog_entry2.php?display_add_comment=1">Add a comment!</a><br/>';
+    echo '<a href="blog_entry2.php?display_add_comment=1&entryId='.$post.'">Add a comment!</a><br/>';
 
     print '<a href="blog_entry2.php">Go back to the list of posts<br></body></html>';
     $result->free();
@@ -100,19 +101,20 @@ function display_one_entry($blogId){
 
 function add_comment_form($entryId,$post){
     $blogId = $entryId;
+    $user_info = $post;
 
 
 
     $add_comment_form = '<div>
        <form name="add_comment" action="blog_entry2.php?add_comment=1" method="POST">
-           <input type="text" name="entryId" hidden value="'.$blogId.'">
-           <input type="text" name="comment_author">
+           <input type="text" name="entryId" hidden value="'.$blogId.'"><br/>
            <label for="comment_author">Enter your name: </label>
-           <input type="text" width="100px" height="200px" name="comment_text">
-             <label for="comment_text">Your comment:</label>
-
+           <input type="text" name="comment_author">
+           <label for="comment_text">Your comment:</label><br/>
+           <textarea class="comment_text"  name="comment_text"></textarea><br/>
+<label for="comment_email">Leave your email address to receive replies</label>
            <input type="text" name="comment_email">
-             <label for="comment_email">Leave your email address to receive replies</label>
+
            <input type="submit">
        </form>
 
@@ -122,6 +124,34 @@ function add_comment_form($entryId,$post){
 
 }
 
+function insert_comment($entryId,$post)
+{
+    $blogId = $entryId;
+    $user_info = $post;
+
+    $name = $user_info['comment_author'];
+
+    $comment_text = $user_info['comment_text'];
+
+    $comment_email = $user_info['comment_email'];
+
+    $host = '127.0.0.1';
+    $user = 'twickler';
+    $pw = '123456';
+    $database = 'blog';
+
+    $db = new mysqli($host, $user, $pw, $database) or die("Cannot connect to MySQL.");
+
+
+    $command = "INSERT INTO blog_comments (blogId,author_name,comment_date,comment_text,comment_email) VALUES (" . $blogId . ",'" . $db->real_escape_string($name) . "',now(),'" . $db->real_escape_string($comment_text) . "','" . $db->real_escape_string($comment_email) . "');";
+
+
+    $db->query($command);
+
+    $db->close();
+
+    display_all_entries();
+}
 
 if ($_GET['entry'] == 1) {
     insert_blog_entry($post_text,$email,$name);
@@ -135,21 +165,20 @@ elseif($_GET['blogId']) {
 }
 
 elseif($_GET['add_comment']){
-    //call add_comment function
+
+
+    insert_comment($_POST['entryId'],$_POST);
 
 
 }
 
 elseif($_GET['display_add_comment']){
-    $add_comment_form = add_comment_form($_GET['blogId'],$_POST);
+    $add_comment_form = add_comment_form($_GET['entryId'],$_POST);
 
     echo $add_comment_form;
 
 }
 
-elseif($_GET['add_comment']){
-    
-}
 
 else {
     display_all_entries();

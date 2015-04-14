@@ -27,3 +27,8 @@ div.wrapper {
     border: 1px solid black;
     margin: 5px 0 0 5px;
 }
+
+.comment_text {
+    width: 100px;
+    height: 200px;
+}
