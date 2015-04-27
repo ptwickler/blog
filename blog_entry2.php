@@ -16,7 +16,7 @@ function insert_blog_entry($post_text,$email,$name) {
 
     $db = new mysqli($host,$user,$pw,$database) or die("Cannot connect to MySQL.");
 
-    $command = "INSERT INTO blog_entry (receivename,post_date,post_text,email) VALUES ('".$db->real_escape_string($c_name)."', now(),'".$db->real_escape_string($c_post_text)."','".$db->real_escape_string($c_email)."');";
+    $command = "INSERT INTO blog_entry (author_name,post_date,post_text,email) VALUES ('".$db->real_escape_string($c_name)."', now(),'".$db->real_escape_string($c_post_text)."','".$db->real_escape_string($c_email)."');";
 
     $db->query($command);
 
@@ -73,12 +73,27 @@ function display_one_entry($blogId){
 
     $db = new mysqli($host,$user,$pw,$database) or die("Cannot connect to MySQL.");
 
-    $command = "SELECT * FROM blog_entry where blogId =". $post . " order by post_date DESC;";
+    $command_entry = "SELECT * FROM blog_entry where blogId =". $post . " order by post_date DESC;";
+
+    $command_comment = "SELECT * FROM blog_comments WHERE blogId =" . $post . ";";
+
+    $result_comment = $db->query($command_comment);
+
+    $comments = '';
+    while($data_comment = $result_comment->fetch_object()){
+
+        $comments .= '<div class="comment">'. $data_comment->comment_text . '</div><br/>';
+    }
 
 
-    $result = $db->query($command);
 
-    while ($data = $result->fetch_object()) {
+
+
+
+
+    $result_entry = $db->query($command_entry);
+
+    while ($data = $result_entry->fetch_object()) {
         print '<!DOCTYPE html><html lang="en">
 <head>
 <title>'. $data->author_name .'
@@ -87,13 +102,16 @@ function display_one_entry($blogId){
 <body><div class="wrapper">
 
                <div class="entry">' . $data->post_text . '</div><div class="post_date">'. $data->post_date . '</div>
-               <div class="auth_name">Post by: ' . $data->author_name . '</div></div>';
+               <div class="auth_name">Post by: ' . $data->author_name . '</div></div>Comments:<br/><br/>';
+
 
     }
+
+    echo $comments;
     echo '<a href="blog_entry2.php?display_add_comment=1&entryId='.$post.'">Add a comment!</a><br/>';
 
     print '<a href="blog_entry2.php">Go back to the list of posts<br></body></html>';
-    $result->free();
+    $result_entry->free();
     $db->close();
 
 
