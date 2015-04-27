@@ -4,17 +4,24 @@ $post_text = $_POST['post'];
 $email = $_POST['email'];
 $name = $_POST['first_name'] . " " . $_POST['last_name'];
 
-function insert_blog_entry($post_text,$email,$name) {
+
+function db_connect(){
     $host = '127.0.0.1';
     $user = 'twickler';
     $pw = '123456';
     $database = 'blog';
 
+    $db = new mysqli($host,$user,$pw,$database) or die("Cannot connect to MySQL.");
+
+    return $db;
+
+}
+function insert_blog_entry($post_text,$email,$name) {
+   $db = db_connect();
+
     $c_name = $name;
     $c_email = $email;
     $c_post_text = $post_text;
-
-    $db = new mysqli($host,$user,$pw,$database) or die("Cannot connect to MySQL.");
 
     $command = "INSERT INTO blog_entry (author_name,post_date,post_text,email) VALUES ('".$db->real_escape_string($c_name)."', now(),'".$db->real_escape_string($c_post_text)."','".$db->real_escape_string($c_email)."');";
 
@@ -25,12 +32,7 @@ function insert_blog_entry($post_text,$email,$name) {
 
 
 function display_all_entries(){
-    $host = '127.0.0.1';
-    $user = 'twickler';
-    $pw = '123456';
-    $database = 'blog';
-
-    $db = new mysqli($host,$user,$pw,$database) or die("Cannot connect to MySQL.");
+    $db = db_connect();
 
     $command = "SELECT * FROM blog_entry;";
 
@@ -63,12 +65,7 @@ function display_one_entry($blogId){
 
     $post = $blogId;
 
-    $host = '127.0.0.1';
-    $user = 'twickler';
-    $pw = '123456';
-    $database = 'blog';
-
-    $db = new mysqli($host,$user,$pw,$database) or die("Cannot connect to MySQL.");
+    $db = db_connect();
 
     $command_entry = "SELECT * FROM blog_entry where blogId =". $post . " order by post_date DESC;";
 
@@ -83,7 +80,7 @@ function display_one_entry($blogId){
     }
 
 $comments .='</div><!--end .comment_wrapper-->';
-    
+
 
     $result_entry = $db->query($command_entry);
 
