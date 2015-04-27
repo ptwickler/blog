@@ -48,12 +48,12 @@ function display_all_entries(){
 
     while ($data = $result->fetch_object()) {
         print '<div class="wrapper">
-               <a href="blog_entry.php?blogId=' . $data->blogId . '">View Post</a>,<br>
+               <h3><a href="blog_entry.php?blogId=' . $data->blogId . '">View Post</a></h3>
                  <div class="entry">' . $data->post_text . '</div><div class="post_date">'. $data->post_date . '</div><div class="auth_name">Post by: ' . $data->author_name . '</div></div>';
 
     }
 
-    print '<a href="blog.html">Add a Post!</a></body></html>';
+    print '<h2><a class="add" href="blog.html">Add a Post!</a></h2></body></html>';
     $result->free();
     $db->close();
 
@@ -79,7 +79,7 @@ function display_one_entry($blogId){
     $comments = '';
     while($data_comment = $result_comment->fetch_object()){
 
-        $comments .= '<div class="comment_name">Comment by: ' . $data_comment->author_name . '</div><div class="comment_text">'. $data_comment->comment_text . '</div><div class = "comment_date">Comment posted on: ' . $data_comment->comment_date .'</div><br/>';
+        $comments .= '<div class="comment_name">Comment by: ' . $data_comment->author_name . '</div><div class="comment_text">'. $data_comment->comment_text . '</div><div class = "comment_date">Comment posted on: ' . $data_comment->comment_date .'</div><div class="comment_email"><a href="mailto"' .$data_comment->comment_email .'">'.$data_comment->comment_email .'</a></div><br/>';
     }
 
 
@@ -98,8 +98,8 @@ function display_one_entry($blogId){
 <link rel="stylesheet" href="blog.css">
 <body><div class="wrapper">
 
-               <div class="entry">' . $data->post_text . '</div><div class="post_date">'. $data->post_date . '</div>
-               <div class="auth_name">Post by: ' . $data->author_name . '</div>Comments:<br/><br/>';
+               <div class="entry"><h2>Post: </h2>' . $data->post_text . '<div class="post_date">'. $data->post_date . '</div>
+               <div class="auth_name">Post by: ' . $data->author_name . '</div></div><!-- end .entry--><h3>Comments:</h3><br/><br/>';
 
 
     }

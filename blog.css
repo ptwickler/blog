@@ -1,19 +1,29 @@
+body{
+    font-family: Verdana, sans-serif;
+}
+
+h3 {
+    padding: 0 0 10px 0;
+    margin: 0 0 0 0;
+}
+
 div.entry {
-    border: 1px solid orange;
+    /*border : 1px solid orange;*/
     width: 90%;
     clear: right;
-    padding: 2px 0 0 3px;
+    padding: 2px 0 10px 3px;
 }
 
 
 div.auth_name {
-    border: 1px solid blue;
+    /*border : 1px solid blue;*/
     font-size: .9em;
     font-weight: bold;
 
 }
 
 div.post_date {
+    /*border: 1px solid red;*/
     font-size: .9em;
     position: relative;
     float: right;
@@ -21,8 +31,8 @@ div.post_date {
 
 div.wrapper {
     width: 81%;
-    border: 1px solid black;
-    margin: 5px 0 0 5px;
+    border : 1px solid black;
+    margin: 5px 0 10px 5px;
 }
 
 .comment_text {
@@ -32,13 +42,18 @@ div.wrapper {
 }
 
 div.comment_text {
-    border: 1px solid green;
+    /*border : 1px solid green;*/
 }
 
 div.comment_name {
-    border: 1px solid yellow;
+    /*border : 1px solid yellow;*/
 }
 
 div.comment_date {
-    border: 1px solid tan;
+    /*border : 1px solid tan;*/
+}
+
+a.add {
+    text-decoration: none;
+    margin-top: 10px;
 }
