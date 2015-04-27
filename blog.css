@@ -1,17 +1,13 @@
 div.entry {
+    border: 1px solid orange;
     width: 90%;
     clear: right;
     padding: 2px 0 0 3px;
 }
 
-div.entry_display {
-    border: 1px solid gray;
-    width: 80%;
-
-
-}
 
 div.auth_name {
+    border: 1px solid blue;
     font-size: .9em;
     font-weight: bold;
 
@@ -24,11 +20,25 @@ div.post_date {
 }
 
 div.wrapper {
+    width: 80%;
     border: 1px solid black;
     margin: 5px 0 0 5px;
 }
 
 .comment_text {
-    width: 100px;
-    height: 200px;
+    position: relative;
+    width: 80%;
+    height: 100px;
+}
+
+div.comment_text {
+    border: 1px solid green;
+}
+
+div.comment_name {
+    border: 1px solid yellow;
+}
+
+div.comment_date {
+    border: 1px solid tan;
 }

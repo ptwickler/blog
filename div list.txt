@@ -1,0 +1,7 @@
+wrapper
+entry
+post_date
+auth_name
+comment_name
+comment_text
+comment_date
