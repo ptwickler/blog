@@ -76,17 +76,14 @@ function display_one_entry($blogId){
 
     $result_comment = $db->query($command_comment);
 
-    $comments = '';
+    $comments = '<div class="comment_wrapper">';
     while($data_comment = $result_comment->fetch_object()){
 
-        $comments .= '<div class="comment_name">Comment by: ' . $data_comment->author_name . '</div><div class="comment_text">'. $data_comment->comment_text . '</div><div class = "comment_date">Comment posted on: ' . $data_comment->comment_date .'</div><div class="comment_email"><a href="mailto"' .$data_comment->comment_email .'">'.$data_comment->comment_email .'</a></div><br/>';
+        $comments .= '<div class="comment_name">Comment by: ' . $data_comment->author_name . '</div><div class="comment_text">'. $data_comment->comment_text . '</div><div class = "comment_date">Comment posted on: ' . $data_comment->comment_date .'</div><div class="comment_email"><a href="mailto"' .$data_comment->comment_email .'">'.$data_comment->comment_email .'</a></div>';
     }
 
-
-
-
-
-
+$comments .='</div><!--end .comment_wrapper-->';
+    
 
     $result_entry = $db->query($command_entry);
 

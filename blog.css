@@ -11,7 +11,7 @@ div.entry {
     /*border : 1px solid orange;*/
     width: 90%;
     clear: right;
-    padding: 2px 0 10px 3px;
+    /*padding: 2px 0 10px 3px*/;
 }
 
 
@@ -32,20 +32,21 @@ div.post_date {
 div.wrapper {
     width: 81%;
     border : 1px solid black;
-    margin: 5px 0 10px 5px;
-}
-
-.comment_text {
-    position: relative;
-    width: 80%;
-    height: 100px;
+    margin: 0 0 0 0;
 }
 
 div.comment_text {
+    margin: 0 0 0 0;
     /*border : 1px solid green;*/
+    position: relative;
+    width: 80%;
+    
 }
 
+
+
 div.comment_name {
+
     /*border : 1px solid yellow;*/
 }
 
@@ -55,5 +56,5 @@ div.comment_date {
 
 a.add {
     text-decoration: none;
-    margin-top: 10px;
+    margin: 0 0 0 0;
 }
