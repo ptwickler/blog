@@ -11,11 +11,12 @@ div.entry {
     /*border : 1px solid orange;*/
     width: 90%;
     clear: right;
-    /*padding: 2px 0 10px 3px*/;
+    margin: 0 0 10px 0;
 }
 
 
 div.auth_name {
+    margin: 20px 0 0 0;
     /*border : 1px solid blue;*/
     font-size: .9em;
     font-weight: bold;
@@ -32,7 +33,8 @@ div.post_date {
 div.wrapper {
     width: 81%;
     border : 1px solid black;
-    margin: 0 0 0 0;
+    margin: 0 0 5px 0;
+    border-radius: 5px;
 }
 
 div.comment_text {
@@ -46,15 +48,29 @@ div.comment_text {
 
 
 div.comment_name {
+     font-weight: bold;
+     margin: 10px 0 10px 0;
 
     /*border : 1px solid yellow;*/
 }
 
 div.comment_date {
+
+    margin: 10px 0 0 0;
     /*border : 1px solid tan;*/
 }
 
 a.add {
     text-decoration: none;
     margin: 0 0 0 0;
+}
+
+div.comment_wrapper {
+    margin: 0 0 200px 0;
+    border: 1px solid black;
+    width: 80%;
+}
+
+div.comment_entry_wrapper {
+    /*margin: 0 0 20px 0;*/
 }
